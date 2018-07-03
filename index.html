@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css">
+    <script src="node_modules/jquery-ui-multidatespicker/jquery-ui.multidatespicker.js"></script>
+    <link src="node_modules/jquery-ui-multidatespicker/jquery-ui.multidatespicker.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
+
+</script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="mdp-demo"><button id="btnBloquear">Bloquear</button>
+    <script>
+
+
+var diasEntreFechas = function(desde, hasta) {
+  	var dia_actual = desde;
+    var fechas = [];
+  	while (dia_actual.isSameOrBefore(hasta)) {
+    	fechas.push(dia_actual.format('MM/DD/YYYY'));
+   		dia_actual.add(1, 'days');
+  	}
+  	return fechas;
+};
+
+function desmembringDate(date) {
+    const ArrayDate = date.split("/");
+    return {
+        "año": ArrayDate[2],
+        "mes": ArrayDate[0],
+        "dia": ArrayDate[1]
+    };
+}
+$('#mdp-demo').multiDatesPicker()
+btnBloquear.addEventListener('click', () => {
+    // const rangeOfDate = $('#mdp-demo').val;
+    // console.log(rangeOfDate)
+    var dates = $('#mdp-demo').multiDatesPicker('getDates')
+      const fechaInicio =  desmembringDate(dates[0]);
+      const fechaFin =  desmembringDate(dates[1]);
+    console.log(fechaFin, fechaInicio)
+
+    fecha1 = `${fechaInicio.año}-${fechaInicio.mes}-${fechaInicio.dia}`;
+    fecha2 = `${fechaFin.año}-${fechaFin.mes}-${fechaFin.dia}`;
+    console.log(`${fechaInicio.año}-${fechaInicio.mes}-${fechaInicio.dia}`,`${fechaFin.año}-${fechaFin.mes}-${fechaFin.dia}`)
+    var desde = moment(fecha1);
+    var hasta = moment(fecha2);
+
+  var results = diasEntreFechas(desde, hasta);
+  $('#mdp-demo').multiDatesPicker('destroy')
+    $('#mdp-demo').multiDatesPicker({
+        addDisabledDates: [...results]
+    });
+})
+
+
+</script>
+</body>
+</html>
