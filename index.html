@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,47 +17,56 @@
 <body>
     <input id="mdp-demo"><button id="btnBloquear">Bloquear</button>
     <script>
-
-
-var diasEntreFechas = function(desde, hasta) {
-  	var dia_actual = desde;
-    var fechas = [];
-  	while (dia_actual.isSameOrBefore(hasta)) {
-    	fechas.push(dia_actual.format('MM/DD/YYYY'));
-   		dia_actual.add(1, 'days');
-  	}
-  	return fechas;
-};
-
-function desmembringDate(date) {
-    const ArrayDate = date.split("/");
-    return {
-        "año": ArrayDate[2],
-        "mes": ArrayDate[0],
-        "dia": ArrayDate[1]
-    };
+function creaFunc() {
+  var nombre = "Mozilla";
+  function muestraNombre() {
+    alert(nombre);
+  }
+  return muestraNombre;
 }
-$('#mdp-demo').multiDatesPicker()
-btnBloquear.addEventListener('click', () => {
-    // const rangeOfDate = $('#mdp-demo').val;
-    // console.log(rangeOfDate)
-    var dates = $('#mdp-demo').multiDatesPicker('getDates')
-      const fechaInicio =  desmembringDate(dates[0]);
-      const fechaFin =  desmembringDate(dates[1]);
-    console.log(fechaFin, fechaInicio)
 
-    fecha1 = `${fechaInicio.año}-${fechaInicio.mes}-${fechaInicio.dia}`;
-    fecha2 = `${fechaFin.año}-${fechaFin.mes}-${fechaFin.dia}`;
-    console.log(`${fechaInicio.año}-${fechaInicio.mes}-${fechaInicio.dia}`,`${fechaFin.año}-${fechaFin.mes}-${fechaFin.dia}`)
-    var desde = moment(fecha1);
-    var hasta = moment(fecha2);
+var miFunc = creaFunc();
+miFunc();
+// <!-- 
+// var diasEntreFechas = function(desde, hasta) {
+//   	var dia_actual = desde;
+//     var fechas = [];
+//   	while (dia_actual.isSameOrBefore(hasta)) {
+//     	fechas.push(dia_actual.format('MM/DD/YYYY'));
+//    		dia_actual.add(1, 'days');
+//   	}
+//   	return fechas;
+// };
 
-  var results = diasEntreFechas(desde, hasta);
-  $('#mdp-demo').multiDatesPicker('destroy')
-    $('#mdp-demo').multiDatesPicker({
-        addDisabledDates: [...results]
-    });
-})
+// function desmembringDate(date) {
+//     const ArrayDate = date.split("/");
+//     return {
+//         "año": ArrayDate[2],
+//         "mes": ArrayDate[0],
+//         "dia": ArrayDate[1]
+//     };
+// }
+// $('#mdp-demo').multiDatesPicker()
+// btnBloquear.addEventListener('click', () => {
+ 
+//     var dates = $('#mdp-demo').multiDatesPicker('getDates')
+//       const fechaInicio =  desmembringDate(dates[0]);
+//       const fechaFin =  desmembringDate(dates[1]);
+//     //console.log(fechaFin, fechaInicio)
+
+//     fecha1 = `${fechaInicio.año}-${fechaInicio.mes}-${fechaInicio.dia}`;
+//     fecha2 = `${fechaFin.año}-${fechaFin.mes}-${fechaFin.dia}`;
+//     console.log(`${fechaInicio.año}-${fechaInicio.mes}-${fechaInicio.dia}`,`${fechaFin.año}-${fechaFin.mes}-${fechaFin.dia}`)
+//     var desde = moment(fecha1);
+//     var hasta = moment(fecha2);
+// console.log(desde, hasta);
+
+//   var results = diasEntreFechas(desde, hasta);
+//     $('#mdp-demo').multiDatesPicker('destroy')
+//         $('#mdp-demo').multiDatesPicker({
+//             addDisabledDates: [...results]
+//         });
+// }) -->
 
 
 </script>
